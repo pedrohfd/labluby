@@ -12,6 +12,10 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		2AAAB20CA774401480F9EB5C /* Almarai Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 658144A6B9444A58847C7879 /* Almarai Bold.ttf */; };
+		31779EECFA764272B2591514 /* Almarai.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 71792B4DC7324CF5B661A7A5 /* Almarai.ttf */; };
+		B4D3C54782764D0791E94EF1 /* Roboto Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FDFB24706224E8DAF5607CA /* Roboto Bold.ttf */; };
+		87767854133A49AFA2B02713 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D713FFA4399D41D6A9A41140 /* Roboto.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,10 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = labluby/main.m; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = labluby/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		658144A6B9444A58847C7879 /* Almarai Bold.ttf */ = {isa = PBXFileReference; name = "Almarai Bold.ttf"; path = "../src/assets/fonts/Almarai Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		71792B4DC7324CF5B661A7A5 /* Almarai.ttf */ = {isa = PBXFileReference; name = "Almarai.ttf"; path = "../src/assets/fonts/Almarai.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7FDFB24706224E8DAF5607CA /* Roboto Bold.ttf */ = {isa = PBXFileReference; name = "Roboto Bold.ttf"; path = "../src/assets/fonts/Roboto Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D713FFA4399D41D6A9A41140 /* Roboto.ttf */ = {isa = PBXFileReference; name = "Roboto.ttf"; path = "../src/assets/fonts/Roboto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +117,7 @@
 				00E356EF1AD99517003FC87E /* lablubyTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				BCFC33C0C23945F598DB875D /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -123,6 +132,18 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		BCFC33C0C23945F598DB875D /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				658144A6B9444A58847C7879 /* Almarai Bold.ttf */,
+				71792B4DC7324CF5B661A7A5 /* Almarai.ttf */,
+				7FDFB24706224E8DAF5607CA /* Roboto Bold.ttf */,
+				D713FFA4399D41D6A9A41140 /* Roboto.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -214,6 +235,10 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				2AAAB20CA774401480F9EB5C /* Almarai Bold.ttf in Resources */,
+				31779EECFA764272B2591514 /* Almarai.ttf in Resources */,
+				B4D3C54782764D0791E94EF1 /* Roboto Bold.ttf in Resources */,
+				87767854133A49AFA2B02713 /* Roboto.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

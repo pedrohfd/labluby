@@ -1,7 +1,4 @@
 import styled from 'styled-components/native'
-import { TextInputProps, TouchableOpacityProps } from 'react-native'
-
-interface Props extends TextInputProps {}
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -9,7 +6,6 @@ export const Container = styled.SafeAreaView`
   justify-content: center;
   align-items: center;
 `
-export const Logo = styled.Image``
 
 export const Input = styled.TextInput.attrs({
   placeholderTextColor: '#535353'
@@ -17,19 +13,25 @@ export const Input = styled.TextInput.attrs({
   background-color: #ffffff;
   color: #000;
   width: 380px;
-  border-radius: 8px;
+  border-radius: 10px;
   padding-left: 15px;
   font-size: 16px;
+  margin-top: 50px;
 `
 
 export const Button = styled.TouchableOpacity`
+  flex-direction: row;
   background-color: #ffce00;
   margin-top: 20px;
-  border-radius: 8px;
+  border-radius: 10px;
   height: 60px;
   width: 380px;
   justify-content: center;
   align-items: center;
 `
 
-export const TextButton = styled.Text``
+export const TextButton = styled.Text`
+  font-size: 25px;
+  font-family: 'Almarai Bold';
+  margin-right: 10px;
+`
