@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-
+import { useNavigation } from '@react-navigation/native'
+import AuthContext from '../../contexts/auth'
 import {
   Container,
   Header,
@@ -21,10 +22,9 @@ import {
 
 import LogoutIcon from '../../assets/icons/logout.svg'
 
-import AuthContext from '../../contexts/auth'
-
 export function Home() {
   const { user, signOut } = useContext(AuthContext)
+  const navigation = useNavigation()
 
   async function handleSignOut() {
     signOut()
@@ -52,17 +52,17 @@ export function Home() {
       </UserData>
 
       <UserButtonArea>
-        <UserButtons>
+        <UserButtons onPress={() => navigation.navigate('Seguidores')}>
           <UserButtonsItems>{user?.followers}</UserButtonsItems>
           <UserButtonsName>Seguidores</UserButtonsName>
         </UserButtons>
 
-        <UserButtons>
+        <UserButtons onPress={() => navigation.navigate('Seguindo')}>
           <UserButtonsItems>{user?.following}</UserButtonsItems>
           <UserButtonsName>Seguindo</UserButtonsName>
         </UserButtons>
 
-        <UserButtons>
+        <UserButtons onPress={() => navigation.navigate('Repos')}>
           <UserButtonsItems>{user?.public_repos}</UserButtonsItems>
           <UserButtonsName>Repos</UserButtonsName>
         </UserButtons>

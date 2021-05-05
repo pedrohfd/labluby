@@ -19,16 +19,35 @@ export function Repositories() {
   const { user } = useContext(AuthContext)
   const [repos, setRepos] = useState<RepoProps[]>([])
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
+  const [loadingMore, setLoadingMore] = useState(false)
 
   useEffect(() => {
-    async function Repos() {
-      const { data } = await api.get(`${user?.login}/repos?&per_page=100`)
-
-      setRepos(data)
-      setLoading(false)
-    }
     Repos()
   }, [])
+
+  async function Repos() {
+    const { data } = await api.get(
+      `${user?.login}/repos?page=${page}&per_page=10`
+    )
+
+    if (page > 1) {
+      setRepos(oldValue => [...oldValue, ...data])
+    } else {
+      setRepos(data)
+    }
+
+    setLoading(false)
+    setLoadingMore(false)
+  }
+
+  function handleFetchMore(distance: number) {
+    if (distance < 1) return
+
+    setLoadingMore(true)
+    setPage(page + 1)
+    Repos()
+  }
 
   return (
     <Container>
@@ -46,7 +65,13 @@ export function Repositories() {
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={<View />}
           ListHeaderComponentStyle={{ marginTop: 20 }}
-          ListFooterComponent={<View />}
+          onEndReachedThreshold={0.1}
+          onEndReached={({ distanceFromEnd }) =>
+            handleFetchMore(distanceFromEnd)
+          }
+          ListFooterComponent={
+            loadingMore ? <ActivityIndicator color="#ffffff" /> : <View />
+          }
           ListFooterComponentStyle={{ marginBottom: 75 }}
         />
       )}

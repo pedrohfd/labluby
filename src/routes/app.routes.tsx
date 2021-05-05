@@ -16,11 +16,41 @@ import { Home } from '../pages/Home'
 import { Repositories } from '../pages/Repositories'
 import { Following } from '../pages/Following'
 import { Followers } from '../pages/Followers'
-
-const bottomRoutes = createBottomTabNavigator()
-const stack = createBottomTabNavigator()
+import { FollowPage } from '../pages/FollowerPage'
 
 const size = 28
+
+const followerStack = createStackNavigator()
+
+const FollowerScreen = () => (
+  <followerStack.Navigator headerMode="none">
+    <followerStack.Screen name="Followers" component={Followers} />
+    <followerStack.Screen
+      name="FollowPage"
+      component={FollowPage}
+      options={{
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+      }}
+    />
+  </followerStack.Navigator>
+)
+
+const followingScreen = createStackNavigator()
+
+const FollowingScreen = () => (
+  <followingScreen.Navigator headerMode="none">
+    <followingScreen.Screen name="Following" component={Following} />
+    <followingScreen.Screen
+      name="FollowPage"
+      component={FollowPage}
+      options={{
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+      }}
+    />
+  </followingScreen.Navigator>
+)
+
+const bottomRoutes = createBottomTabNavigator()
 
 const AppRoutes: React.FC = () => (
   <bottomRoutes.Navigator
@@ -67,6 +97,7 @@ const AppRoutes: React.FC = () => (
       style: {
         height: 75,
         paddingVertical: 15,
+        paddingRight: 15,
         paddingBottom: 10,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
@@ -79,8 +110,8 @@ const AppRoutes: React.FC = () => (
   >
     <bottomRoutes.Screen name="Home" component={Home} />
     <bottomRoutes.Screen name="Repos" component={Repositories} />
-    <bottomRoutes.Screen name="Seguidores" component={Following} />
-    <bottomRoutes.Screen name="Seguindo" component={Followers} />
+    <bottomRoutes.Screen name="Seguidores" component={FollowerScreen} />
+    <bottomRoutes.Screen name="Seguindo" component={FollowingScreen} />
   </bottomRoutes.Navigator>
 )
 

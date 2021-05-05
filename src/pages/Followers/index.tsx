@@ -18,20 +18,39 @@ export function Followers() {
   const { user } = useContext(AuthContext)
   const [followers, setFollowers] = useState<FollowersProps[]>([])
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
+  const [loadingMore, setLoadingMore] = useState(false)
 
   useEffect(() => {
-    async function Followers() {
-      const { data } = await api.get(`${user?.login}/followers`)
-
-      setFollowers(data)
-      setLoading(false)
-    }
     Followers()
   }, [])
 
+  async function Followers() {
+    const { data } = await api.get(
+      `${user?.login}/followers?page=${page}&per_page=10`
+    )
+
+    if (page > 1) {
+      setFollowers(oldValue => [...oldValue, ...data])
+    } else {
+      setFollowers(data)
+    }
+
+    setLoading(false)
+    setLoadingMore(false)
+  }
+
+  function handleFetchMore(distance: number) {
+    if (distance < 1) return
+
+    setLoadingMore(true)
+    setPage(page + 1)
+    Followers()
+  }
+
   return (
     <Container>
-      <Header title="Seguindo" quantity={String(user?.followers)} />
+      <Header title="Seguidores" quantity={String(user?.followers)} />
 
       {loading ? (
         <ActivityIndicatorArea>
@@ -44,8 +63,14 @@ export function Followers() {
           renderItem={({ item }) => <FollowCard data={item} />}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={<View />}
-          ListHeaderComponentStyle={{ marginTop: 20 }}
-          ListFooterComponent={<View />}
+          ListHeaderComponentStyle={{ marginTop: 10 }}
+          onEndReachedThreshold={0.1}
+          onEndReached={({ distanceFromEnd }) =>
+            handleFetchMore(distanceFromEnd)
+          }
+          ListFooterComponent={
+            loadingMore ? <ActivityIndicator color="#ffffff" /> : <View />
+          }
           ListFooterComponentStyle={{ marginBottom: 75 }}
         />
       )}

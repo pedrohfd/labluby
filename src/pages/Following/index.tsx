@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FlatList, ActivityIndicator, View } from 'react-native'
+import AuthContext from '../../contexts/auth'
 
 import { Container, ActivityIndicatorArea } from './styles'
-import AuthContext from '../../contexts/auth'
 
 import { Header } from '../../components/Header'
 import { FollowCard } from '../../components/FollowCard'
@@ -18,16 +18,35 @@ export function Following() {
   const { user } = useContext(AuthContext)
   const [following, setFollowing] = useState<FollowingProps[]>([])
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
+  const [loadingMore, setLoadingMore] = useState(false)
 
   useEffect(() => {
-    async function Following() {
-      const { data } = await api.get(`${user?.login}/following`)
-
-      setFollowing(data)
-      setLoading(false)
-    }
     Following()
   }, [])
+
+  async function Following() {
+    const { data } = await api.get(
+      `${user?.login}/following?page=${page}&per_page=10`
+    )
+
+    if (page > 1) {
+      setFollowing(oldValue => [...oldValue, ...data])
+    } else {
+      setFollowing(data)
+    }
+
+    setLoadingMore(false)
+    setLoading(false)
+  }
+
+  function handleFetchMore(distance: number) {
+    if (distance < 1) return
+
+    setLoadingMore(true)
+    setPage(page + 1)
+    Following()
+  }
 
   return (
     <Container>
@@ -43,7 +62,15 @@ export function Following() {
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => <FollowCard data={item} />}
           showsVerticalScrollIndicator={false}
-          ListFooterComponent={<View />}
+          ListHeaderComponent={<View />}
+          ListHeaderComponentStyle={{ marginTop: 10 }}
+          onEndReachedThreshold={0.1}
+          onEndReached={({ distanceFromEnd }) =>
+            handleFetchMore(distanceFromEnd)
+          }
+          ListFooterComponent={
+            loadingMore ? <ActivityIndicator color="#ffffff" /> : <View />
+          }
           ListFooterComponentStyle={{ marginBottom: 75 }}
         />
       )}

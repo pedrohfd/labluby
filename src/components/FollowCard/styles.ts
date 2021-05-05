@@ -1,12 +1,17 @@
 import styled from 'styled-components/native'
 
 export const Container = styled.View`
-  flex: 1;
   flex-direction: row;
-  align-items: center;
-  height: 100px;
+  justify-content: space-between;
   border-bottom-width: 0.6px;
   border-color: #404040;
+  padding-top: 20px;
+  padding-bottom: 20px;
+`
+
+export const ContentArea = styled.View`
+  flex-direction: row;
+  align-items: center;
 `
 
 export const OrangeBorder = styled.View`
@@ -19,6 +24,8 @@ export const OrangeBorder = styled.View`
 
 export const Name = styled.Text`
   color: #ffffff;
+  font-size: 18px;
+  font-family: 'Roboto Bold';
 `
 
 export const Avatar = styled.Image`
@@ -31,6 +38,11 @@ export const Avatar = styled.Image`
   margin-right: 20px;
 `
 
-export const RepoStar = styled.Text`
-  color: #ffffff;
+export const ButtonArea = styled.View`
+  justify-content: center;
+  padding-right: 20px;
+`
+
+export const Button = styled.TouchableOpacity`
+  align-items: flex-end;
 `

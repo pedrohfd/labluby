@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-
 import Routes from './routes/index'
 import { AuthProvider } from './contexts/auth'
 

@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import {
+  Container,
+  ContentArea,
+  OrangeBorder,
+  Name,
+  Avatar,
+  ButtonArea,
+  Button
+} from './styles'
+import { useNavigation } from '@react-navigation/native'
+import AuthContext from '../../contexts/auth'
 
-import { Container, OrangeBorder, Name, Avatar } from './styles'
-
-interface RepoProps {
+import ArrowButton from '../../assets/icons/arrow-button.svg'
+interface FollowProps {
   data: {
     id: number
     login: string
@@ -10,14 +20,30 @@ interface RepoProps {
   }
 }
 
-export function FollowCard({ data }: RepoProps) {
+export function FollowCard({ data }: FollowProps) {
+  const navigation = useNavigation()
+  const { setChangeUsername } = useContext(AuthContext)
+
+  async function handleChangeUser() {
+    setChangeUsername(data.login)
+    navigation.navigate('FollowPage')
+  }
+
   return (
     <Container>
-      <OrangeBorder />
+      <ContentArea>
+        <OrangeBorder />
 
-      <Avatar source={{ uri: data.avatar_url }} />
+        <Avatar source={{ uri: data.avatar_url }} />
 
-      <Name>#{data.login}</Name>
+        <Name>#{data.login}</Name>
+      </ContentArea>
+
+      <ButtonArea>
+        <Button onPress={handleChangeUser}>
+          <ArrowButton height={18} width={18} />
+        </Button>
+      </ButtonArea>
     </Container>
   )
 }

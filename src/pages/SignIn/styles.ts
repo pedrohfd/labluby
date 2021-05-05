@@ -19,6 +19,10 @@ export const Input = styled.TextInput.attrs({
   margin-top: 50px;
 `
 
+export const TextRequire = styled.Text`
+  color: #ff0000;
+`
+
 export const Button = styled.TouchableOpacity`
   flex-direction: row;
   background-color: #ffce00;

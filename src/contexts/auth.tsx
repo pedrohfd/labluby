@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react'
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { View, ActivityIndicator } from 'react-native'
 import api from '../services/auth'
 
@@ -25,10 +25,13 @@ interface User {
 interface AuthContextData {
   signed: boolean
   user: User | null
+  setUser: (state: User | null) => void
   username: string | null
+  setUsername: (state: string) => void
+  changeUsername: string | null
+  setChangeUsername: (state: string) => void
   signIn(): Promise<void>
   signOut(): void
-  setUsername: (state: string) => void
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
@@ -36,6 +39,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null)
   const [username, setUsername] = useState<string | null>(null)
+  const [changeUsername, setChangeUsername] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -44,8 +48,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
       if (storageUser) {
         setUser(JSON.parse(storageUser))
-        setLoading(false)
       }
+      setLoading(false)
     }
     loadStorage()
   }, [])
@@ -79,15 +83,19 @@ export const AuthProvider: React.FC = ({ children }) => {
       </View>
     )
   }
+
   return (
     <AuthContext.Provider
       value={{
         signed: !!user,
         user,
+        setUser,
         signIn,
         signOut,
         username,
-        setUsername
+        setUsername,
+        changeUsername,
+        setChangeUsername
       }}
     >
       {children}
